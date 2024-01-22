@@ -7,20 +7,15 @@ const fs = require("fs");
 const app = express();
 const port = 3000;
 
-// Parse URL-encoded data with extended option set to true
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the 'public' directory
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-// Serve static files from the 'views' directory
 app.use(express.static(path.join(__dirname, "views")));
 
-// Function to handle GET requests
 const handleWeatherGetRequest = (req, res) => {
   res.sendFile(path.join(__dirname, "views", "weather.html"));
 };
-// Function to handle POST requests
 const handleWeatherPostRequest = async (req, res) => {
   const city = req.body.city;
   const lat = req.body.lat;
@@ -87,11 +82,9 @@ const handleWeatherPostRequest = async (req, res) => {
   }
 }
 
-// Function to handle GET requests for the movie
 const handleMovieGetRequest = (req, res) => {
   res.sendFile(path.join(__dirname, "views", "movie.html"));
 };
-
 
 const handleMoviePostRequest = async (req, res) => {
   const movieTitle = req.body.movieTitle;
@@ -110,7 +103,6 @@ const handleMoviePostRequest = async (req, res) => {
         <img src="${movieData.Poster}" alt="${movieData.Title} Poster">
       </div>`;
 
-    // Send the movieHtml as a JSON response
     res.json({ movieHtml });
   } catch (error) {
     console.error(error);
@@ -123,12 +115,10 @@ const handleApodGetRequest = (req, res) => {
   res.sendFile(path.join(__dirname, "views", "nasa.html"));
 };
 
-// Function to handle GET requests for the APOD API
 const handleApodPostRequest = async (req, res) => {
   try {
     const apiKey = "1Pxo0Pvd4Jbtoq2eLp6mYLVXNfD2uJknX8RwjHcU"
     const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-
     const response = await axios.get(apiUrl);
     const apodData = response.data;
 
