@@ -86,6 +86,7 @@ const handleMovieGetRequest = (req, res) => {
   res.sendFile(path.join(__dirname, "views", "movie.html"));
 };
 
+
 const handleMoviePostRequest = async (req, res) => {
   const movieTitle = req.body.movieTitle;
 
@@ -102,7 +103,6 @@ const handleMoviePostRequest = async (req, res) => {
         <p>${movieData.Plot}</p>
         <img src="${movieData.Poster}" alt="${movieData.Title} Poster">
       </div>`;
-
     res.json({ movieHtml });
   } catch (error) {
     console.error(error);
@@ -119,6 +119,7 @@ const handleApodPostRequest = async (req, res) => {
   try {
     const apiKey = "1Pxo0Pvd4Jbtoq2eLp6mYLVXNfD2uJknX8RwjHcU"
     const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
     const response = await axios.get(apiUrl);
     const apodData = response.data;
 
